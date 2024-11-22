@@ -1,113 +1,144 @@
-/* Estilo da Hero Section */
-.hero {
-  background-image: src = ("app/assets/images/pirate-codex.jpg"); /* Substitua pelo fundo desejado */
-  background-size: cover;
-  background-position: center;
-  padding: 100px 20px;
-  text-align: center;
+/* Estrutura Principal */
+.home-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: #141414; /* Fundo escuro */
+  color: #ffffff; /* Texto branco */
+  font-family: "Arial", sans-serif;
 }
 
-.hero-content {
-  background: rgba(0, 0, 0, 0.7); /* Fundo semitransparente */
+/* Menu Lateral */
+.menu {
+  width: 250px;
+  background-color: #1f1f1f; /* Cinza escuro */
   padding: 20px;
-  border-radius: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra do menu */
 }
 
-.hero-content h1 {
-  font-size: 48px;
-  margin: 0 0 10px;
-  color: #e50914; /* Vermelho Netflix */
-}
-
-.hero-content p {
-  font-size: 18px;
+.menu .logo {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.buttons button {
-  margin: 10px;
+.menu .logo-img {
+  width: 100%;
+  max-width: 150px; /* Limita o tamanho da logo */
+  height: auto;
+}
+
+.menu .nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.menu .nav-list li {
+  margin: 15px 0;
+}
+
+.menu .nav-list .nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.menu .nav-list .nav-link:hover {
+  color: #e50914; /* Vermelho vibrante */
+}
+
+/* Conteúdo Principal */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Hero Section */
+.hero {
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #e50914; /* Vermelho vibrante */
+}
+
+.hero-description {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #cccccc; /* Texto em cinza claro */
+}
+
+.btn-pesquisa {
+  background-color: #e50914; /* Vermelho vibrante */
+  color: #ffffff;
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.buttons .primary {
-  background-color: #e50914;
-  color: #fff;
+.btn-pesquisa:hover {
+  background-color: #b20710; /* Vermelho mais escuro */
 }
 
-.buttons .primary:hover {
-  background-color: #b20710;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+  }
 
-.buttons .secondary {
-  background-color: #fff;
-  color: #000;
-}
+  .menu {
+    width: 100%;
+    text-align: center;
+    box-shadow: none;
+  }
 
-.buttons .secondary:hover {
-  background-color: #e5e5e5;
-}
+  .content {
+    padding: 20px;
+  }
 
-/* Catálogo de Itens */
-.catalog {
-  margin: 20px;
-}
+  .hero-title {
+    font-size: 28px;
+  }
 
-.catalog h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  .hero-description {
+    font-size: 16px;
+  }
 }
-.home-container {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.home-image {
-  max-width: 80%; /* Ajusta para ocupar no máximo 80% da largura da página */
-  height: auto; /* Mantém a proporção da imagem */
-  border-radius: 10px; /* Bordas arredondadas (opcional) */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar a imagem */
-}
-
-h1 {
-  color: #e50914; /* Vermelho Netflix */
-  margin-top: 20px;
-}
-
-p {
-  color: #ffffff;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.catalog-items {
-  display: flex;
-  gap: 10px;
-}
-
-.item {
-  background-color: #333;
-  color: #fff;
+/* Estilo para o menu lateral */
+.menu {
+  width: 250px;
+  background-color: #1f1f1f;
   padding: 20px;
-  border-radius: 5px;
-  flex: 1;
-  text-align: center;
-}
-.secondary {
-  background-color: #ffffff;
-  color: #141414;
-  border: 2px solid #e50914;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  height: 100vh; /* Altura total */
 }
 
-.secondary:hover {
-  background-color: #e50914;
-  color: #ffffff;
+/* Estilo para a logo */
+.logo {
+  text-align: center; /* Centraliza a logo no menu lateral */
+  margin-bottom: 30px; /* Espaçamento inferior para a logo */
+}
+
+.logo-img {
+  width: 100%; /* Ajusta a largura da logo ao tamanho do container */
+  max-width: 150px; /* Limita a largura máxima */
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+@media (max-width: 768px) {
+  /* Para telas pequenas (tablets ou mobile) */
+  .logo-img {
+    max-width: 120px; /* Logo menor em dispositivos móveis */
+  }
 }

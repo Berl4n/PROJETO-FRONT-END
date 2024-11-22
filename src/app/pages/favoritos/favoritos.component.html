@@ -1,0 +1,31 @@
+<div class="favorites-container">
+  <h1>Meus Livros Favoritos</h1>
+
+  <!-- Exibe os livros favoritos -->
+  <div *ngIf="favorites.length > 0" class="books-container">
+    <div class="book" *ngFor="let book of favorites">
+      <!-- Título truncado -->
+      <h3>{{ book.volumeInfo.title | truncate : 30 }}</h3>
+
+      <!-- Descrição truncada -->
+      <p *ngIf="book.volumeInfo.description">
+        {{ book.volumeInfo.description | truncate : 100 }}
+      </p>
+
+      <!-- Exibe a capa do livro -->
+      <img
+        *ngIf="book.volumeInfo.imageLinks?.thumbnail"
+        [src]="book.volumeInfo.imageLinks.thumbnail"
+        alt="Capa do livro"
+      />
+
+      <!-- Botão para remover dos favoritos -->
+      <button (click)="removeFavorite(book)">Remover dos Favoritos</button>
+    </div>
+  </div>
+
+  <!-- Mensagem caso não haja favoritos -->
+  <div *ngIf="favorites.length === 0" class="no-results">
+    <p>Você ainda não adicionou livros aos favoritos.</p>
+  </div>
+</div>

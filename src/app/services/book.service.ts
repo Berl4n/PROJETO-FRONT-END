@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BookService {
-  private API_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
+  private apiKey: string = 'AIzaSyCpVl7_EubbId2NUvUxHIphHQ1TF-Ve0aw';
+  private baseUrl: string = 'https://www.googleapis.com/books/v1/volumes'; // API de livros do Google
 
   constructor(private http: HttpClient) {}
 
-  // Função para buscar livros na API Google Books
+  // Método para buscar livros com base no título
   searchBooks(query: string): Observable<any> {
-    return this.http.get(`${this.API_URL}${query}`);
+    const url = `${this.baseUrl}?q=${encodeURIComponent(query)}`;
+    return this.http.get<any>(url);
   }
 }

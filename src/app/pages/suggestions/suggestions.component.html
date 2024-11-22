@@ -1,0 +1,43 @@
+<div class="suggestions-container">
+  <h1>Sugestões de Livros</h1>
+  <div *ngIf="isLoading" class="loading">Carregando livros...</div>
+
+  <div *ngIf="!isLoading">
+    <div *ngFor="let category of categories" class="category">
+      <h2>{{ category }}</h2>
+      <div *ngIf="booksByCategory[category]?.length > 0; else noBooks">
+        <div class="books-grid">
+          <div class="book-card" *ngFor="let book of booksByCategory[category]">
+            <img
+              [src]="
+                book.volumeInfo.imageLinks?.thumbnail || 'assets/no-cover.png'
+              "
+              alt="{{ book.volumeInfo.title }}"
+            />
+            <h3>{{ book.volumeInfo.title }}</h3>
+            <p>
+              <strong>Autor(es):</strong>
+              {{ book.volumeInfo.authors?.join(", ") || "Não informado" }}
+            </p>
+            <p>
+              <strong>Editora:</strong>
+              {{ book.volumeInfo.publisher || "Não informado" }}
+            </p>
+            <a
+              *ngIf="book.volumeInfo.infoLink"
+              [href]="book.volumeInfo.infoLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="details-link"
+            >
+              Mais detalhes
+            </a>
+          </div>
+        </div>
+      </div>
+      <ng-template #noBooks>
+        <p>Não há livros disponíveis para a categoria {{ category }}.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

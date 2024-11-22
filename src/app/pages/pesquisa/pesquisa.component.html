@@ -1,26 +1,51 @@
-<!-- book-search.component.html (template HTML) -->
 <div class="search-container">
   <h1>Pesquise Livros</h1>
 
+  <!-- Campo de entrada para pesquisa -->
   <input
     type="text"
     [(ngModel)]="query"
     placeholder="Digite o título do livro"
   />
-  />
-  <button (click)="search()">Buscar</button>
 
+  <!-- Container para os botões -->
+  <div class="button-container">
+    <button (click)="search()">Pesquisar</button>
+    <button class="clear" (click)="clearSearch()">Limpar</button>
+  </div>
+
+  <!-- Indicador de carregamento -->
+  <div *ngIf="isLoading">Carregando...</div>
+
+  <!-- Mensagem de erro -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- Exibição dos livros retornados -->
   <div *ngIf="books.length > 0" class="books-container">
     <div class="book" *ngFor="let book of books">
       <h3>{{ book.volumeInfo.title }}</h3>
       <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+
+      <!-- Exibição da capa do livro -->
       <img
         *ngIf="book.volumeInfo.imageLinks?.thumbnail"
         [src]="book.volumeInfo.imageLinks.thumbnail"
         alt="Capa do livro"
       />
+
+      <!-- Botão para adicionar aos favoritos -->
+      <button (click)="addToFavorites(book)" *ngIf="!isFavorite(book)">
+        Adicionar aos Favoritos
+      </button>
+
+      <!-- Botão para remover dos favoritos -->
+      <button (click)="removeFromFavorites(book)" *ngIf="isFavorite(book)">
+        Remover dos Favoritos
+      </button>
     </div>
   </div>
+
+  <!-- Mensagem caso não haja resultados -->
   <div *ngIf="books.length === 0 && query.trim() !== ''" class="no-results">
     <p>Nenhum livro encontrado.</p>
   </div>

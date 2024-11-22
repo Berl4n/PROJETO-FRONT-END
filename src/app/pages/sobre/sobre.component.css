@@ -22,3 +22,29 @@
   max-width: 600px;
   margin-bottom: 15px;
 }
+/* Estilo básico para elementos destacados */
+[appHighlight] {
+  padding: 10px;
+  border: 1px solid hsl(241, 92%, 51%);
+  margin: 10px 0;
+}
+
+/* Estilo para títulos */
+h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Botão */
+button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #b20710;
+}
