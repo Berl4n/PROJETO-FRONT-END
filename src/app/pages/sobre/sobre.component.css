@@ -1,0 +1,24 @@
+.sobre-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+  background-color: #141414; /* Fundo escuro */
+  color: #ffffff;
+  text-align: center;
+}
+
+.sobre-container h1 {
+  font-size: 36px;
+  color: #e50914; /* Vermelho Netflix */
+  margin-bottom: 20px;
+}
+
+.sobre-container p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 15px;
+}

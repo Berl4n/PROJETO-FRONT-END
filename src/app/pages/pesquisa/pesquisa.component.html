@@ -1,0 +1,27 @@
+<!-- book-search.component.html (template HTML) -->
+<div class="search-container">
+  <h1>Pesquise Livros</h1>
+
+  <input
+    type="text"
+    [(ngModel)]="query"
+    placeholder="Digite o título do livro"
+  />
+  />
+  <button (click)="search()">Buscar</button>
+
+  <div *ngIf="books.length > 0" class="books-container">
+    <div class="book" *ngFor="let book of books">
+      <h3>{{ book.volumeInfo.title }}</h3>
+      <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+      <img
+        *ngIf="book.volumeInfo.imageLinks?.thumbnail"
+        [src]="book.volumeInfo.imageLinks.thumbnail"
+        alt="Capa do livro"
+      />
+    </div>
+  </div>
+  <div *ngIf="books.length === 0 && query.trim() !== ''" class="no-results">
+    <p>Nenhum livro encontrado.</p>
+  </div>
+</div>

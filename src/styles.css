@@ -1,0 +1,17 @@
+/* Estilo global */
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: #141414; /* Fundo escuro da Netflix */
+  color: #ffffff; /* Texto branco */
+}
+
+a {
+  text-decoration: none;
+  color: #e50914; /* Vermelho típico da Netflix */
+  font-weight: bold;
+}
+
+a:hover {
+  color: #b20710; /* Vermelho mais escuro ao passar o mouse */
+}

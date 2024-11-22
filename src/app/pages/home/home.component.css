@@ -1,0 +1,113 @@
+/* Estilo da Hero Section */
+.hero {
+  background-image: src = ("app/assets/images/pirate-codex.jpg"); /* Substitua pelo fundo desejado */
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.7); /* Fundo semitransparente */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin: 0 0 10px;
+  color: #e50914; /* Vermelho Netflix */
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttons .primary {
+  background-color: #e50914;
+  color: #fff;
+}
+
+.buttons .primary:hover {
+  background-color: #b20710;
+}
+
+.buttons .secondary {
+  background-color: #fff;
+  color: #000;
+}
+
+.buttons .secondary:hover {
+  background-color: #e5e5e5;
+}
+
+/* Catálogo de Itens */
+.catalog {
+  margin: 20px;
+}
+
+.catalog h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.home-image {
+  max-width: 80%; /* Ajusta para ocupar no máximo 80% da largura da página */
+  height: auto; /* Mantém a proporção da imagem */
+  border-radius: 10px; /* Bordas arredondadas (opcional) */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar a imagem */
+}
+
+h1 {
+  color: #e50914; /* Vermelho Netflix */
+  margin-top: 20px;
+}
+
+p {
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.catalog-items {
+  display: flex;
+  gap: 10px;
+}
+
+.item {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  flex: 1;
+  text-align: center;
+}
+.secondary {
+  background-color: #ffffff;
+  color: #141414;
+  border: 2px solid #e50914;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.secondary:hover {
+  background-color: #e50914;
+  color: #ffffff;
+}
