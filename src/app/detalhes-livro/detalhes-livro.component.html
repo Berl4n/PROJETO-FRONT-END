@@ -1,0 +1,49 @@
+<div class="detalhes-livro-container">
+  <!-- Exibição durante o carregamento -->
+  <div *ngIf="isLoading" class="loading">Carregando detalhes do livro...</div>
+
+  <!-- Exibição de mensagem de erro -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Exibição dos detalhes do livro -->
+  <div *ngIf="livroDetalhes$ | async as livroDetalhes">
+    <h2>{{ livroDetalhes?.volumeInfo.title || "Título não disponível" }}</h2>
+
+    <p>
+      <strong>Autor:</strong>
+      {{
+        livroDetalhes?.volumeInfo.authors?.join(", ") || "Autor desconhecido"
+      }}
+    </p>
+    <p>
+      <strong>Gênero:</strong>
+      {{
+        livroDetalhes?.volumeInfo.categories?.join(", ") ||
+          "Gênero não especificado"
+      }}
+    </p>
+
+    <p>
+      <strong>Publicado em:</strong>
+      {{ livroDetalhes?.volumeInfo.publishedDate || "Data não disponível" }}
+    </p>
+
+    <p><strong>Descrição:</strong></p>
+    <p>
+      {{ livroDetalhes?.volumeInfo.description || "Descrição não disponível" }}
+    </p>
+
+    <!-- Exibição da capa do livro -->
+    <img
+      *ngIf="livroDetalhes?.volumeInfo.imageLinks?.thumbnail"
+      [src]="livroDetalhes?.volumeInfo.imageLinks?.thumbnail"
+      alt="Capa do livro"
+      class="book-cover"
+    />
+
+    <!-- Botão de voltar -->
+    <button (click)="voltar()" class="voltar-button">Voltar</button>
+  </div>
+</div>

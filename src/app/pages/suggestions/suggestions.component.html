@@ -1,43 +1,35 @@
 <div class="suggestions-container">
-  <h1>Sugestões de Livros</h1>
+  <h1>Livros dos Autores Mais Pesquisados</h1>
+
+  <!-- Indicador de carregamento -->
   <div *ngIf="isLoading" class="loading">Carregando livros...</div>
 
-  <div *ngIf="!isLoading">
-    <div *ngFor="let category of categories" class="category">
-      <h2>{{ category }}</h2>
-      <div *ngIf="booksByCategory[category]?.length > 0; else noBooks">
-        <div class="books-grid">
-          <div class="book-card" *ngFor="let book of booksByCategory[category]">
-            <img
-              [src]="
-                book.volumeInfo.imageLinks?.thumbnail || 'assets/no-cover.png'
-              "
-              alt="{{ book.volumeInfo.title }}"
-            />
-            <h3>{{ book.volumeInfo.title }}</h3>
-            <p>
-              <strong>Autor(es):</strong>
-              {{ book.volumeInfo.authors?.join(", ") || "Não informado" }}
-            </p>
-            <p>
-              <strong>Editora:</strong>
-              {{ book.volumeInfo.publisher || "Não informado" }}
-            </p>
-            <a
-              *ngIf="book.volumeInfo.infoLink"
-              [href]="book.volumeInfo.infoLink"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="details-link"
-            >
-              Mais detalhes
-            </a>
-          </div>
+  <!-- Exibe os livros por autor -->
+  <ng-container *ngFor="let author of authors">
+    <div *ngIf="booksByAuthor[author]?.length" class="author-section">
+      <h2>{{ author }}</h2>
+      <div class="books-grid">
+        <!-- Exibe os livros do autor -->
+        <div class="book-card" *ngFor="let book of booksByAuthor[author]">
+          <img
+            *ngIf="book.volumeInfo.imageLinks?.thumbnail"
+            [src]="book.volumeInfo.imageLinks.thumbnail"
+            alt="{{ book.volumeInfo.title }}"
+            class="book-cover"
+          />
+          <h3 class="book-title">
+            {{ book.volumeInfo.title | truncate : 30 }}
+          </h3>
+          <p class="book-description">
+            {{ book.volumeInfo.description | truncate : 100 }}
+          </p>
+
+          <!-- Botão "Ver Detalhes" -->
+          <button class="details-button" [routerLink]="['/detalhes', book.id]">
+            Ver Detalhes
+          </button>
         </div>
       </div>
-      <ng-template #noBooks>
-        <p>Não há livros disponíveis para a categoria {{ category }}.</p>
-      </ng-template>
     </div>
-  </div>
+  </ng-container>
 </div>

@@ -19,8 +19,15 @@
         alt="Capa do livro"
       />
 
+      <!-- Botão para ver detalhes -->
+      <button class="details-button" [routerLink]="['/detalhes', book.id]">
+        Ver Detalhes
+      </button>
+
       <!-- Botão para remover dos favoritos -->
-      <button (click)="removeFavorite(book)">Remover dos Favoritos</button>
+      <button class="remove-button" (click)="removeFavorite(book)">
+        Remover dos Favoritos
+      </button>
     </div>
   </div>
 

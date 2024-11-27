@@ -4,39 +4,43 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FavoriteService } from '../../services/favorite.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-pesquisa',
   templateUrl: './pesquisa.component.html',
   styleUrls: ['./pesquisa.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  standalone: false,
+  //imports: [CommonModule, FormsModule, HttpClientModule],
 })
 export class PesquisaComponent {
-  query: string = ''; // Termo de busca digitado pelo usuário
-  books: any[] = []; // Lista de livros retornados pela API
-  errorMessage: string = ''; // Mensagens de erro ou feedback para o usuário
-  isLoading: boolean = false; // Flag para mostrar carregamento
+  query: string = '';
+  books: any[] = [];
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
+  // Armazena os livros para saber quais têm detalhes visíveis
+  visibleDetails: Set<any> = new Set();
 
   constructor(
     private bookService: BookService,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private router: Router
   ) {}
 
-  // Método para buscar livros
   search(): void {
     if (!this.query.trim()) {
       this.errorMessage = 'Por favor, insira um título para buscar.';
       return;
     }
 
-    this.isLoading = true; // Inicia o carregamento
-    this.books = []; // Limpa resultados anteriores
-    this.errorMessage = ''; // Limpa mensagens de erro anteriores
+    this.isLoading = true;
+    this.books = [];
+    this.errorMessage = '';
 
-    // Faz a requisição à API usando o serviço
     this.bookService.searchBooks(this.query).subscribe(
       (response) => {
-        this.books = response.items || []; // Armazena os resultados
+        this.books = response.items || [];
         if (this.books.length === 0) {
           this.errorMessage = 'Nenhum livro encontrado para a busca realizada.';
         }
@@ -47,30 +51,40 @@ export class PesquisaComponent {
         console.error('Erro na busca:', error);
       },
       () => {
-        this.isLoading = false; // Finaliza o carregamento
+        this.isLoading = false;
       }
     );
   }
 
-  // Método para limpar a pesquisa
   clearSearch(): void {
-    this.query = ''; // Limpa o campo de pesquisa
-    this.books = []; // Limpa os resultados dos livros
-    this.errorMessage = ''; // Limpa qualquer mensagem de erro
+    this.query = '';
+    this.books = [];
+    this.errorMessage = '';
   }
 
-  // Adicionar livro aos favoritos
   addToFavorites(book: any): void {
-    this.favoriteService.addFavorite(book); // Chama o serviço para adicionar
+    this.favoriteService.addFavorite(book);
   }
 
-  // Remover livro dos favoritos
   removeFromFavorites(book: any): void {
-    this.favoriteService.removeFavorite(book); // Chama o serviço para remover
+    this.favoriteService.removeFavorite(book);
   }
 
-  // Verificar se o livro é favorito
   isFavorite(book: any): boolean {
-    return this.favoriteService.isFavorite(book); // Verifica se o livro está nos favoritos
+    return this.favoriteService.isFavorite(book);
+  }
+
+  // Alternar a visibilidade dos detalhes do livro
+  toggleDetails(book: any): void {
+    if (this.visibleDetails.has(book)) {
+      this.visibleDetails.delete(book);
+    } else {
+      this.visibleDetails.add(book);
+    }
+  }
+
+  // Verificar se os detalhes estão visíveis
+  isDetailsVisible(book: any): boolean {
+    return this.visibleDetails.has(book);
   }
 }

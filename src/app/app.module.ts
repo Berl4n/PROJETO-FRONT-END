@@ -15,18 +15,23 @@ import { TextColorDirective } from './diretivas/text-color.directive';
 import { UppercasePipe } from './pipes/uppercase.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FavoritosComponent } from './pages/favoritos/favoritos.component';
-
+import { PesquisaComponent } from './pages/pesquisa/pesquisa.component';
+import { DetalhesLivroPipe } from './pipes/detalhes-livro.pipe';
+import { DetalhesLivroComponent } from './detalhes-livro/detalhes-livro.component';
 @NgModule({
   declarations: [
     AppComponent, // Componente raiz
     HomeComponent, // Página principal
     SuggestionsComponent, // Página de Sugestões
     SobreComponent, // Página Sobre
-    HighlightDirective,
-    TextColorDirective,
+    HighlightDirective, //
+    TextColorDirective, //
     UppercasePipe,
     TruncatePipe,
     FavoritosComponent,
+    PesquisaComponent,
+    DetalhesLivroPipe,
+    DetalhesLivroComponent,
   ],
   imports: [
     BrowserModule, // Necessário para rodar a aplicação no navegador

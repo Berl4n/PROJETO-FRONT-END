@@ -8,56 +8,34 @@ import { GoogleBooksService } from '../../services/google-books.service';
   standalone: false,
 })
 export class SuggestionsComponent implements OnInit {
-  // Configuração de critérios
-  categories: string[] = ['Fiction', 'Adventure', 'Romance', 'Science'];
-  authors: string[] = ['J.K. Rowling', 'Stephen King', 'Haruki Murakami'];
-  booksByCategory: { [key: string]: any[] } = {};
-  booksByAuthor: { [key: string]: any[] } = {};
-  isLoading: boolean = true;
+  // Lista de autores mais pesquisados
+  authors: string[] = ['George R.R. Martin', 'Stephen King', 'Neil Gaiman'];
+  booksByAuthor: { [key: string]: any[] } = {}; // Armazena os livros por autor
+  isLoading: boolean = false; // Controle de carregamento
 
   constructor(private googleBooksService: GoogleBooksService) {}
 
   ngOnInit(): void {
-    this.loadBooksByCategory(); // Busca livros por categoria
-    this.loadBooksByAuthor(); // Busca livros por autor
+    this.loadBooksByAuthor(); // Carrega os livros dos autores
   }
 
-  // Busca livros por categoria
-  loadBooksByCategory(): void {
-    this.isLoading = true;
-    this.categories.forEach((category) => {
-      this.googleBooksService.getBooks(`subject:${category}`).subscribe(
-        (response: any) => {
-          this.booksByCategory[category] = response.items || [];
-        },
-        (error) => {
-          console.error(
-            `Erro ao buscar livros da categoria ${category}:`,
-            error
-          );
-          this.booksByCategory[category] = [];
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
-    });
-  }
-
-  // Busca livros por autores específicos
+  // Busca livros por autores mais pesquisados
   loadBooksByAuthor(): void {
-    this.isLoading = true;
+    this.isLoading = true; // Inicia o estado de carregamento
     this.authors.forEach((author) => {
       this.googleBooksService.getBooks(`inauthor:${author}`).subscribe(
         (response: any) => {
-          this.booksByAuthor[author] = response.items || [];
+          // Apenas adiciona se houver resultados
+          if (response.items?.length > 0) {
+            this.booksByAuthor[author] = response.items;
+          }
         },
         (error) => {
           console.error(`Erro ao buscar livros do autor ${author}:`, error);
           this.booksByAuthor[author] = [];
         },
         () => {
-          this.isLoading = false;
+          this.isLoading = false; // Finaliza o estado de carregamento
         }
       );
     });

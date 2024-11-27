@@ -1,86 +1,79 @@
-/* Estrutura Principal */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Krona+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Container Principal */
 .home-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
-  background-color: #141414; /* Fundo escuro */
-  color: #ffffff; /* Texto branco */
-  font-family: "Arial", sans-serif;
 }
 
 /* Menu Lateral */
 .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 250px;
-  background-color: #1f1f1f; /* Cinza escuro */
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra do menu */
+  height: 100%;
+  background-color: #141414;
+  color: #f0f0f0;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.menu .logo {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.menu .logo-img {
-  width: 100%;
-  max-width: 150px; /* Limita o tamanho da logo */
-  height: auto;
-}
-
-.menu .nav-list {
+.nav-list {
   list-style: none;
   padding: 0;
 }
 
-.menu .nav-list li {
-  margin: 15px 0;
-}
-
-.menu .nav-list .nav-link {
+.nav-link {
+  display: block;
+  padding: 15px;
+  color: #f0f0f0;
   text-decoration: none;
-  color: #ffffff;
-  font-size: 16px;
-  transition: color 0.3s ease;
+  font-size: 18px;
 }
 
-.menu .nav-list .nav-link:hover {
-  color: #e50914; /* Vermelho vibrante */
+.nav-link:hover {
+  background-color: #333;
 }
 
 /* Conteúdo Principal */
 .content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 40px;
+  flex: 1;
+  padding: 20px;
 }
 
 /* Hero Section */
 .hero {
-  max-width: 600px;
+  text-align: center;
+  margin: auto;
 }
 
+/* Estilo do Título */
 .hero-title {
   font-size: 36px;
-  margin-bottom: 20px;
-  color: #e50914; /* Vermelho vibrante */
+  color: #fff;
 }
 
+/* Descrição */
 .hero-description {
   font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 30px;
-  color: #cccccc; /* Texto em cinza claro */
+  color: #f0f0f0;
+  margin-bottom: 20px;
 }
 
+/* Botão de Pesquisa */
 .btn-pesquisa {
-  background-color: #e50914; /* Vermelho vibrante */
-  color: #ffffff;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #e50914;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -88,57 +81,5 @@
 }
 
 .btn-pesquisa:hover {
-  background-color: #b20710; /* Vermelho mais escuro */
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .home-container {
-    flex-direction: column;
-  }
-
-  .menu {
-    width: 100%;
-    text-align: center;
-    box-shadow: none;
-  }
-
-  .content {
-    padding: 20px;
-  }
-
-  .hero-title {
-    font-size: 28px;
-  }
-
-  .hero-description {
-    font-size: 16px;
-  }
-}
-/* Estilo para o menu lateral */
-.menu {
-  width: 250px;
-  background-color: #1f1f1f;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  height: 100vh; /* Altura total */
-}
-
-/* Estilo para a logo */
-.logo {
-  text-align: center; /* Centraliza a logo no menu lateral */
-  margin-bottom: 30px; /* Espaçamento inferior para a logo */
-}
-
-.logo-img {
-  width: 100%; /* Ajusta a largura da logo ao tamanho do container */
-  max-width: 150px; /* Limita a largura máxima */
-  height: auto; /* Mantém a proporção da imagem */
-}
-
-@media (max-width: 768px) {
-  /* Para telas pequenas (tablets ou mobile) */
-  .logo-img {
-    max-width: 120px; /* Logo menor em dispositivos móveis */
-  }
+  background-color: #b20710;
 }

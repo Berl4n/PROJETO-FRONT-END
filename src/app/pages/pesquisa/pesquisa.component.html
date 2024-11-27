@@ -1,52 +1,78 @@
-<div class="search-container">
-  <h1>Pesquise Livros</h1>
-
-  <!-- Campo de entrada para pesquisa -->
-  <input
-    type="text"
-    [(ngModel)]="query"
-    placeholder="Digite o título do livro"
-  />
-
-  <!-- Container para os botões -->
-  <div class="button-container">
-    <button (click)="search()">Pesquisar</button>
-    <button class="clear" (click)="clearSearch()">Limpar</button>
+<div class="pesquisa-container">
+  <!-- Barra de busca -->
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      placeholder="Digite o título do livro..."
+      (keyup.enter)="search()"
+      class="search-input"
+    />
+    <button (click)="search()" class="search-button">Buscar</button>
+    <button (click)="clearSearch()" class="clear-button">Limpar</button>
   </div>
 
-  <!-- Indicador de carregamento -->
-  <div *ngIf="isLoading">Carregando...</div>
+  <!-- Feedback de carregamento -->
+  <div *ngIf="isLoading" class="loading-message">Carregando livros...</div>
 
-  <!-- Mensagem de erro -->
+  <!-- Mensagens de erro -->
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <!-- Exibição dos livros retornados -->
-  <div *ngIf="books.length > 0" class="books-container">
-    <div class="book" *ngFor="let book of books">
-      <h3>{{ book.volumeInfo.title }}</h3>
-      <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
-
-      <!-- Exibição da capa do livro -->
+  <!-- Resultados da pesquisa -->
+  <div class="books-grid" *ngIf="books.length > 0">
+    <div class="book-card" *ngFor="let book of books">
       <img
         *ngIf="book.volumeInfo.imageLinks?.thumbnail"
         [src]="book.volumeInfo.imageLinks.thumbnail"
-        alt="Capa do livro"
+        [alt]="book.volumeInfo.title"
+        class="book-cover"
       />
-
-      <!-- Botão para adicionar aos favoritos -->
-      <button (click)="addToFavorites(book)" *ngIf="!isFavorite(book)">
-        Adicionar aos Favoritos
-      </button>
-
-      <!-- Botão para remover dos favoritos -->
-      <button (click)="removeFromFavorites(book)" *ngIf="isFavorite(book)">
-        Remover dos Favoritos
-      </button>
+      <h3 class="book-title">
+        {{ book.volumeInfo.title | uppercase | truncate : 30 }}
+      </h3>
+      <p class="book-authors">
+        Autor(es):
+        {{
+          book.volumeInfo.authors?.join(", ") || "Não informado" | truncate : 40
+        }}
+      </p>
+      <p class="book-publisher">
+        Editora:
+        {{ book.volumeInfo.publisher || "Não informado" | truncate : 30 }}
+      </p>
+      <p class="book-description">
+        {{
+          book.volumeInfo.description || "Descrição indisponível."
+            | truncate : 100
+        }}
+      </p>
+      <a [routerLink]="['/detalhes', book.id]" class="details-button"
+        >Ver Detalhes</a
+      >
+      <div class="buttons">
+        <button
+          *ngIf="!isFavorite(book)"
+          (click)="addToFavorites(book)"
+          class="favorite-button"
+        >
+          Adicionar aos Favoritos
+        </button>
+        <button
+          *ngIf="isFavorite(book)"
+          (click)="removeFromFavorites(book)"
+          class="unfavorite-button"
+        >
+          Remover dos Favoritos
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Mensagem caso não haja resultados -->
-  <div *ngIf="books.length === 0 && query.trim() !== ''" class="no-results">
-    <p>Nenhum livro encontrado.</p>
+  <!-- Mensagem de nenhum resultado encontrado -->
+  <div
+    *ngIf="!isLoading && books.length === 0 && !errorMessage"
+    class="no-results"
+  >
+    Nenhum livro encontrado.
   </div>
 </div>
